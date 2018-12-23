@@ -21,9 +21,10 @@ func HandleGet(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 func HandlePost(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
     key := "test"
+	value := ps.ByName("key")
 	ctx := NewContext(w, r)
 
-	value, err := Set(key)
+	value, err := Set(key, value)
 	if err != nil {
 		ctx.SetResult(1000, "network error")
 		return

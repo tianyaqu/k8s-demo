@@ -24,10 +24,10 @@ func Get(key string) (string, error) {
 	return redis.String(conn.Do("GET", key))
 }
 
-func Set(key string) (string, error) {
+func Set(key, value string) (string, error) {
     pool := NewPool()
 	conn := pool.Get()
 	defer conn.Close()
 
-	return redis.String(conn.Do("SET", key))
+	return redis.String(conn.Do("SET", key, value))
 }
