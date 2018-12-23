@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/julienschmidt/httprouter"
+    "github.com/gomodule/redigo/redis"
 	"net/http"
 	"log"
 )
@@ -32,7 +33,10 @@ func HandlePost(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	ctx.SetData(value)
 }
 
+var pool *redis.Pool
+
 func main() {
+    pool = NewPool()
 	router := httprouter.New()
 	router.GET("/home/:key", HandleGet)
 	router.POST("/home/:key", HandlePost)

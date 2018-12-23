@@ -6,7 +6,7 @@ import (
 
 
 func DialFunc() (redis.Conn, error){
-    return redis.Dial("tcp", "ssdb-service:8888")
+    return redis.Dial("tcp", "redis://:@ssdb-service:8888")
 }
 
 func NewPool()* redis.Pool {
@@ -17,7 +17,6 @@ func NewPool()* redis.Pool {
 }
 
 func Get(key string) (string, error) {
-    pool := NewPool()
 	conn := pool.Get()
 	defer conn.Close()
 
@@ -25,7 +24,6 @@ func Get(key string) (string, error) {
 }
 
 func Set(key, value string) (string, error) {
-    pool := NewPool()
 	conn := pool.Get()
 	defer conn.Close()
 
