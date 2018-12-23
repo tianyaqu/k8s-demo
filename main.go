@@ -14,8 +14,8 @@ func HandleGet(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 	value, err := Get(key)
 	if err != nil {
+        log.Println(value, ' ', err)
 		ctx.SetResult(1000, "network error")
-		return
 	}
 	ctx.SetData(value)
 }
@@ -27,8 +27,8 @@ func HandlePost(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 	value, err := Set(key, value)
 	if err != nil {
+        log.Println(value, ' ', err)
 		ctx.SetResult(1000, "network error")
-		return
 	}
 	ctx.SetData(value)
 }
